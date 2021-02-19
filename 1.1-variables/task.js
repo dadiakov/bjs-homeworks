@@ -22,7 +22,7 @@ function sayHello(userName) {
 }
 
 function calculateFormula() {
-    let x = 2;
+	let x = 2;
 	let y = 22;
 	let z = 0;
 
