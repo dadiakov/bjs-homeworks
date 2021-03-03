@@ -1,25 +1,19 @@
 ﻿'use strict';
 
-
-
 function getSolutions(a, b, c) {
-
   let roots = [];
   let x1 = 0, x2 = 0;
   let D = b**2 - 4*a*c;
   if (D === 0) {
-	x1 = -b / (2*a);
-	roots.push(x1);
+    x1 = -b / (2*a);
+    roots.push(x1);
   } else if (D > 0) {
-	x1 = (-b + Math.sqrt(D)) / (2*a);
-
-	x2 = (-b - Math.sqrt(D)) / (2*a);
-	roots.push(x1);
-
-	roots.push(x2);
+      x1 = (-b + Math.sqrt(D)) / (2*a);
+      x2 = (-b - Math.sqrt(D)) / (2*a);
+      roots.push(x1);
+      roots.push(x2);
     };
-
-  return { D, roots };
+  return {D, roots};
 }
 
 function showSolutionsMessage(a, b, c) {
@@ -28,9 +22,9 @@ function showSolutionsMessage(a, b, c) {
   if (result.D < 0) {
     console.log('Уравнение не имеет вещественных корней');
   } else if (result.D === 0) {
-	console.log(`Уравнение имеет один корень X₁ = ${result.roots[0]}`);
+      console.log(`Уравнение имеет один корень X₁ = ${result.roots[0]}`);
   } else {
-	console.log(`Уравнение имеет два корня. X₁ = ${result.roots[0]}, X₂ = ${result.roots[1]}`);
+      console.log(`Уравнение имеет два корня. X₁ = ${result.roots[0]}, X₂ = ${result.roots[1]}`);
   }
 }
 
@@ -59,7 +53,7 @@ function getAverageScore(data) {
 function getAverageMark(marks) {
   let sum = 0;
   if (marks.length === 0) {
-	return 0;
+    return 0;
   };
   for (let i = 0; i < marks.length; i++) {
     sum += marks[i];
