@@ -94,5 +94,5 @@ function testCase(testFunction, timerName) {
   console.timeEnd(timerName);
 } 
 
-testCase(sum, 'startTest');
-testCase(memorize, 'startTest');
+testCase(sum, 'startTestSum');
+testCase(memorize, 'startTestMem');
