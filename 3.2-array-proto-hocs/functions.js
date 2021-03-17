@@ -28,7 +28,7 @@ function getTotalDamage() {
   let totalDamage = 0;
   weapons.map(function(weapon) {
 		totalDamage+=weapon.attack; 
-              });
+  });
   return totalDamage;
 }
 console.log(getTotalDamage());
@@ -82,3 +82,17 @@ function memorize(fn, limit) {
     return comp;
   }
 }
+
+function testCase(testFunction, timerName) {
+  let testArray = [ [1,2,3], [1,2], [1,2,3], [1,2], [9,5,2,4] ];
+  console.time(timerName);
+  for (let i=0; i<50; i++) {
+    for (let i=0; i<testArray.length; i++) {
+      testFunction(testArray[i]);
+    }
+  }
+  console.timeEnd(timerName);
+} 
+
+testCase(sum, 'startTest');
+testCase(memorize, 'startTest');
