@@ -83,4 +83,4 @@ function testCase(testFunction, timerName) {
 } 
 
 testCase(sum, 'startTestSum');
-testCase(memorize, 'startTestMem');
+testCase(memorize(sum, 10), 'startTestMem');
