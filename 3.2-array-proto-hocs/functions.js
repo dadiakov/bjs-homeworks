@@ -1,49 +1,39 @@
 'use strict';
 
 const weapons = [new Knife(), new Staff(), new Axe(), new StormStaff(), new LongBow(), new Bow()];
-console.log(weapons);
 
 function getNames() {
   return weapons.map(wp => wp.name);
 }
-console.log(getNames());
 
 function getCountReliableWeapons(reqDurab) {
   return weapons.filter(weapon => weapon.durability > reqDurab).length;
 }
-console.log(getCountReliableWeapons(200));
-
 
 function hasReliableWeapons(reqDurab) {
   return weapons.filter(weapon => weapon.durability > reqDurab).length > 0;
 }
-console.log(hasReliableWeapons(200));
 
 function getReliableWeaponsNames(reqDurab) {
   return weapons.filter(weapon => weapon.durability > reqDurab).map(weapon => weapon.name);
 }
-console.log(getReliableWeaponsNames(200));
 
 function getTotalDamage() {
-  let totalDamage = 0;
-  weapons.map(function(weapon) {
-		totalDamage+=weapon.attack; 
-  });
-  return totalDamage;
+  return weapons.reduce(((sum, weapon) => sum + weapon.attack), 0);
 }
-console.log(getTotalDamage());
 
 function getValuestCountToSumValues(arr, num) {
-  let outPut = [];
-  let sum = 0, count = 0;
-  arr.map(function(arrNum) {
-    count++;
-    sum+=arrNum;
+  return arr.reduce((sum, value, index, arr) => {
+    sum += value;
+    if (index == arr.length-1 && sum < num) {
+      return arr.length;
+    }
     if (sum >= num) {
-      outPut.push(count);
-    };
-  });
-  return outPut[0];
+      arr.splice(index);
+      return index+1;
+    }
+    return sum;
+    });
 }
 
 function sleep(milliseconds) 
@@ -53,14 +43,16 @@ function sleep(milliseconds)
 }
 
 function sum(...args) {
-  sleep(100);
+//  sleep(100);
   return args.reduce((sum, arg) => {
     return sum += +arg;
   }, 0);
 }
 
 function compareArrays(arr1, arr2) {
-  return arr1.every(arr => arr1.length === arr2.length && arr === arr2[arr1.indexOf(arr)]);
+  return arr1.every(function(arg, index) {
+    return (arg == arr2[index] && arr1.length === arr2.length)
+  });
 }
 
 function memorize(fn, limit) {
@@ -75,22 +67,18 @@ function memorize(fn, limit) {
       memory.shift();
     }
     function finder(obj) {
-      if (compareArrays(obj.args, args)) {
-        return true;
-        }
+      return compareArrays(obj.args, args);
     }
     return comp;
   }
 }
 
 function testCase(testFunction, timerName) {
-  let testArray = [ [1,2,3], [1,2], [1,2,3], [1,2], [9,5,2,4] ];
+  let testArray = [ [1,2,3], [1,2], [1,2,3], [1,2] , [9,5,2,4] ];
   console.time(timerName);
   for (let i=0; i<50; i++) {
-    for (let i=0; i<testArray.length; i++) {
-      testFunction(testArray[i]);
+     testArray.forEach((args) => testFunction(...args));
     }
-  }
   console.timeEnd(timerName);
 } 
 
